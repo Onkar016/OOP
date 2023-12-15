@@ -1,0 +1,82 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+class items {
+    string name;
+    int cost;
+    int quantity;
+
+public:
+    int code;
+
+    items(int a, string b, int c, int d) : code(a), name(b), cost(c), quantity(d) {}
+
+    void display() const {
+        cout << " | Itemcode | " << code << " | Name  | " << name << " | Cost | " << cost << " | Qty | " << quantity << endl;
+    }
+};
+
+bool compareItems(const items& a, const items& b) {
+    return a.code < b.code;
+}
+
+int main() {
+    vector<items> v1;
+    int choice;
+
+    while (1) {
+        cout << "Enter 1 - Insert | 2 - Print all | 3 - Search | 4 - Sort | 5 - Exit" << endl;
+        cin >> choice;
+
+        if (choice == 1) {
+            string name;
+            int cost, quantity, code;
+            cout << "Enter item details code | Name | Cost | Qty: ";
+            cin >> code >> name >> cost >> quantity;
+
+            items item(code, name, cost, quantity);
+            v1.push_back(item);
+        } else if (choice == 2) {
+            for (const auto& item : v1) {
+                item.display();
+            }
+        } else if (choice == 3) {
+            int c;
+            cout << "Enter item code to be searched: ";
+            cin >> c;
+            int found = 0;
+
+            for (const auto& item : v1) {
+                if (item.code == c) {
+                    item.display();
+                    found = 1;
+                    break;
+                }
+            }
+
+            if (!found) {
+                cout << "Item not found." << endl;
+            }
+        } else if (choice == 4) {
+            // Sort items based on their codes
+            sort(v1.begin(), v1.end(), compareItems);
+
+            cout << "Items sorted by code." << endl;
+
+            // Display the sorted items
+            for (const auto& item : v1) {
+                item.display();
+            }
+        } else if (choice == 5) {
+            cout << "Exiting program." << endl;
+            break;
+        } else {
+            cout << "Invalid choice. Please try again." << endl;
+        }
+    }
+
+    return 0;
+}
