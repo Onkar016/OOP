@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+
+    map<string,int>state;
+
+    state.insert(pair<string,int>("maharastra",1002121));
+    state.insert(pair<string,int>("Goa",44442121));
+    state.insert(pair<string,int>("ASAM",121212));
+
+
+    string search;
+
+    cout<<"enter the element to be search"<<endl;
+    cin>>search;
+    
+    map<string,int>::iterator i;
+
+    int f = 0;
+    
+
+    for(i=state.begin();i!=state.end();i++)
+    {
+        if(search == i->first)
+        {
+            f++;
+            cout<<"population of the "<<i->first<<" is "<<i->second<<endl;
+        }
+
+    }
+    if(f == 0)
+    {
+        cout<<"state is not in population map"<<endl;
+    }
+
+
+}
